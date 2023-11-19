@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "antd";
 import Cards from "./Cards";
 import {
   API_KEY,
@@ -22,7 +21,13 @@ function MainScreen() {
   return (
     <div>
       <main>
-        <div className=" bg-cover h-screen" style={{backgroundImage:'url(https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg)'}}>
+        <div
+          className=" bg-cover h-screen"
+          style={{
+            backgroundImage:
+              "url(https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg)",
+          }}
+        >
           <div className="w-96 h-96 relative">
             <div className="absolute top-2/4 left-16">
               <h4 className="text-gray-700 text-7xl mb-8">
@@ -32,12 +37,12 @@ function MainScreen() {
             </div>
             <div className="absolute top-96 left-24">
               <div className="absolute z-10 flex">
-              <button className="bg-red-500 w-24 mx-4 hover:bg-black rounded-md p-1 hover:text-white">
-                Play
-              </button>
-              <button className="bg-slate-800  hover:bg-red-600 rounded-md w-24">
-                List
-              </button>
+                <button className="bg-red-500 w-24 mx-4 hover:bg-black rounded-md p-1 hover:text-white">
+                  Play
+                </button>
+                <button className="bg-slate-800  hover:bg-red-600 rounded-md w-24">
+                  List
+                </button>
               </div>
             </div>
           </div>

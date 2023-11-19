@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Axiosinstance from "./Axios";
 import Youtube from "react-youtube";
-import axios from "axios";
 
 function Cards(props) {
   const [cardImages, setCardImages] = useState([]);
-  const [urlId, setUrlId] = useState('');
+  const [urlId, setUrlId] = useState("");
 
-  // console.log(props);
   let url = props.url;
   useEffect(() => {
     Axiosinstance.get(url)
       .then((res) => {
-        // console.log(res.data.results);
         setCardImages(res.data.results);
       })
       .catch((err) => {
@@ -32,14 +29,16 @@ function Cards(props) {
     console.log(id);
     Axiosinstance.get(
       `movie/${id}/videos?api_key=b1e8475315e4519e6a3f2d11108671f4&language=en-US`
-    ).then((res) => {
-      console.log(res);
-      if (res.data.results.length !== 0) {
-        setUrlId(res.data.results[0]);
-      }
-    }).catch((err)=>{
-      console.log(err);
-    })
+    )
+      .then((res) => {
+        console.log(res);
+        if (res.data.results.length !== 0) {
+          setUrlId(res.data.results[0]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="bg-slate-800 overflow-y-hidden">
@@ -48,7 +47,7 @@ function Cards(props) {
         {cardImages.map((itm) => {
           return (
             <img
-            className="images"
+              className="images"
               key={itm.id}
               style={{
                 minWidth: "400px",
@@ -63,7 +62,7 @@ function Cards(props) {
           );
         })}
       </div>
-      {  urlId && <Youtube videoId={urlId.key} opt={opts} />}
+      {urlId && <Youtube videoId={urlId.key} opt={opts} />}
     </div>
   );
 }

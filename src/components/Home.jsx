@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../App.css";
 import MainScreen from "./MainScreen";
+import { ContexName } from "..";
 
 function Home() {
+  const name = useContext(ContexName);
   return (
     <div>
       <nav>
@@ -21,10 +23,11 @@ function Home() {
           <div>
             <i className="fa-solid fa-magnifying-glass mx-5"></i>
             <i className="fa-solid fa-bell"></i>
+            <p>welcome - {name}</p>
           </div>
         </div>
       </nav>
-      <MainScreen/>
+      <MainScreen />
     </div>
   );
 }
