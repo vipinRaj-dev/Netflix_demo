@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+
+import { db } from "../firebase/config";
 
 function FrontPage() {
   const [username, setUsername] = useState("");
@@ -9,24 +12,34 @@ function FrontPage() {
 
   const navigate = useNavigate();
 
-  const loginHardCoded = {
-    username: "vipin@123",
-    password: "12345",
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const fetchUsers = async () => {
+      try {
+        const userDoc = await getDoc(doc(db, "users", "L09USdGwlB2rtnSRP68k"));
 
-    if (
-      username === loginHardCoded.username &&
-      password === loginHardCoded.password
-    ) {
-      navigate("/home");
-    } else {
-      setBool(true);
-      setUsername("");
-      setPassword("");
-    }
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+
+          if (
+            username === userData.username &&
+            password === userData.password
+          ) {
+            navigate("/home");
+          } else {
+            setBool(true);
+            setUsername("");
+            setPassword("");
+          }
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUsers();
   };
 
   return (
